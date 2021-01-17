@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./app.css";
 import Habits from "./components/habits";
 import Navbar from "./components/navbar";
+import Add from "./components/add";
 
 class App extends Component {
     state = {
@@ -44,6 +45,7 @@ class App extends Component {
         return (
             <>
                 <Navbar habits={this.state.habits} />
+                <Add habits={this.state.habits} />
                 <Habits
                     habits={this.state.habits}
                     onIncrement={this.handleIncrement}
