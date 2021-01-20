@@ -13,17 +13,30 @@ class App extends Component {
     };
 
     handleIncrement = (habit) => {
-        const habits = [...this.state.habits];
-        const index = habits.indexOf(habit);
-        habits[index].count++;
+        // const habits = [...this.state.habits];
+        // const index = habits.indexOf(habit);
+        // habits[index].count++;
+        const habits = this.state.habits.map((item) => {
+            if (item.id === habit.id) {
+                return { ...habit, count: habit.count + 1 };
+            }
+            return item;
+        });
         this.setState({ habits: habits }); // habits만 써도 가능
     };
 
     handleDecrement = (habit) => {
-        const habits = [...this.state.habits];
-        const index = habits.indexOf(habit);
-        const count = habits[index].count - 1;
-        habits[index].count = count < 0 ? 0 : count;
+        // const habits = [...this.state.habits];
+        // const index = habits.indexOf(habit);
+        // const count = habits[index].count - 1;
+        // habits[index].count = count < 0 ? 0 : count;
+        const habits = this.state.habits.map((item) => {
+            if (item.id === habit.id) {
+                const count = habit.count - 1;
+                return { ...habit, count: count < 0 ? 0 : count };
+            }
+            return item;
+        });
         this.setState({ habits });
     };
 
@@ -41,9 +54,15 @@ class App extends Component {
     };
 
     handleReset = () => {
-        const habits = this.state.habits.map((habit) => {
-            habit.count = 0;
-            return habit;
+        // const habits = this.state.habits.map((habit) => {
+        //     habit.count = 0;
+        //     return habit;
+        // });
+        const habits = this.state.habits.map((item) => {
+            if (item.count !== 0) {
+                return { ...item, count: 0 };
+            }
+            return item;
         });
         this.setState({ habits });
     };
